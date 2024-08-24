@@ -68,16 +68,19 @@ def __argmax(a: list) -> int:
 def get_parada_metro(
     nombre_parada: str,
     fuzzy: bool = True,
+    fuzzy_threshold: float = 0.6,
 ) -> ParadaMetroModel:
     """Pedir información de parada de metro."""
     paradas = __get_paradas()
 
     if fuzzy:
-        nombre_parada = list(paradas.keys())[
-            __argmax(
-                [__similarity(parada, nombre_parada) for parada in paradas],
-            )
+        similarities = [
+            __similarity(parada, nombre_parada) for parada in paradas
         ]
+        if max(similarities) < fuzzy_threshold:
+            raise ParadaNotFoundError from None
+
+        nombre_parada = list(paradas.keys())[__argmax(similarities)]
 
     if nombre_parada not in paradas:
         raise ParadaNotFoundError from None
