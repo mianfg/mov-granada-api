@@ -27,7 +27,7 @@ vcard_metro_dict = __get_vcard_dict("metro", "parada", ["base64"])
 
 def __minutos_to_str(minutos: int) -> str:
     if minutos == 0:
-        return "Inminente"
+        return "⚠ Inminente"
     if minutos == 1:
         return "1 minuto"
     return f"{minutos} minutos"
