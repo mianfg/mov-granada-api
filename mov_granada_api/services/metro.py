@@ -48,14 +48,17 @@ def __get_paradas() -> list[ParadaMetroModel]:
     return {
         parada[0]: ParadaMetroModel(
             nombre=parada[0],
-            proximos=[
-                ProximoMetroModel(
-                    direccion="Armilla" if i >= 2 else "Albolote",  # noqa: PLR2004
-                    minutos=int(col),
-                )
-                for i, col in enumerate(parada[1:])
-                if col
-            ],
+            proximos=sorted(
+                [
+                    ProximoMetroModel(
+                        direccion="Armilla" if i >= 2 else "Albolote",  # noqa: PLR2004
+                        minutos=int(col),
+                    )
+                    for i, col in enumerate(parada[1:])
+                    if col
+                ],
+                key=lambda proximo: proximo.minutos,
+            ),
         )
         for parada in paradas
     }
