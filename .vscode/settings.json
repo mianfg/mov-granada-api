@@ -1,0 +1,16 @@
+{
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports.ruff": "explicit"
+        },
+        "editor.rulers": [
+            79, 120
+        ],
+    },
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "conventionalCommits.scopes": [
+        "dev-environment"
+    ],
+}
